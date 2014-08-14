@@ -64,9 +64,10 @@ class Application_Entity_MdLog {
     function getPutsDescargaLOG($url, $id, $numero, $codigo_catalogo) {
         if (isset($_SERVER['HTTP_X_UP_CALLING_LINE_ID']) && $_SERVER['HTTP_X_UP_CALLING_LINE_ID'] != "") {
             $str_number = $_SERVER['HTTP_X_UP_CALLING_LINE_ID'];
-        } else {
-            $str_number = $_GET['nu'];
-        }
+        } 
+//        else {
+//            $str_number = $_GET['nu'];
+//        }
         
         $datos = array(
             'fecha' => date("Y-m-d"),
@@ -83,7 +84,7 @@ class Application_Entity_MdLog {
     private function saveCdrDescargas($datos) {
 
         $name = date('YmdH');
-        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../logs/cdr/rt/descargas/' . $name . ".descarga");
+        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../logs/cdr/rt/' . $name . ".descarga");
         //$writer = new Zend_Log_Writer_Stream('/var/log/portalwap/'.$name.".moso");
         $formatter = new Zend_Log_Formatter_Simple('%message%' . PHP_EOL);
         $writer->setFormatter($formatter);

@@ -144,12 +144,12 @@ class Application_Entity_CobroShootLink {
                     $this->file_get_contents($NUMBER, $CODIGO);
                 } else {
                     $cadena = '&nue=' . $NUMBER;
-                    header('Location: /pe/ne/wap/rt-devel/?error=007' . $cadena);
+                    header('Location: /pe/ne/wap/public/rt-devel/?error=007' . $cadena);
                     exit;
                 }
             }
         } else {
-            header("Location: /pe/ne/wap/rt-devel/");
+            header("Location: /pe/ne/wap/public/rt-devel/");
             exit;
         }
     }
@@ -158,9 +158,20 @@ class Application_Entity_CobroShootLink {
         $xml = file_get_contents("http://174.121.234.90/Moso/WSMultimedia/wsTOOLS.asmx/RegistrarDescarga?operadora=3&numUser=" . $NUMBER . "&idContenido=0&catalogo=" . $CODIGO . "&esGratis=True");
         $x = new SimpleXMLElement($xml);
         $ID = $x;
-       $logDescarga= new Application_Entity_MdLog();
-       $logDescarga->getPutsDescargaLOG("http://174.121.234.90/mvpe/Baja.aspx",$ID,$NUMBER,$CODIGO );
-        header("Location: http://174.121.234.90/nxpe/Baja.aspx?id=" . $ID);
-      }
+        $logDescarga = new Application_Entity_MdLog();
+        $logDescarga->getPutsDescargaLOG("http://174.121.234.90/mvpe/Baja.aspx", $ID, $NUMBER, $CODIGO);
+         header("Location: http://174.121.234.90/nxpe/Baja.aspx?id=" . $ID);
+       
+    }
+ 
+    function obtenerIdDEscarga($NUMBER, $CODIGO) {
+        $xml = file_get_contents("http://174.121.234.90/Moso/WSMultimedia/wsTOOLS.asmx/RegistrarDescarga?operadora=3&numUser=" . $NUMBER . "&idContenido=0&catalogo=" . $CODIGO . "&esGratis=True");
+        $x = new SimpleXMLElement($xml);
+        $ID = $x;
+        $logDescarga = new Application_Entity_MdLog();
+        $logDescarga->getPutsDescargaLOG("http://174.121.234.90/mvpe/Baja.aspx", $ID, $NUMBER, $CODIGO);
+       return 'http://174.121.234.90/nxpe/Baja.aspx?id=' . $ID; 
+    }
 
+    
 }

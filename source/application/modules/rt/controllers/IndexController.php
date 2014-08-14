@@ -34,7 +34,7 @@ class Rt_IndexController extends Zend_Controller_Action {
         $BANERs = $portal->getBaner();
         $dataContenido = $nusoap->getContenido("wsRTConsultarAlbum", "1", "67", "_RTWAP", "1", "0");
         $dataContenidoBody = $nusoap->getContenido("wsRTConsultarAlbum", "1", $BODYs[0]["ALBUM"], $BODYs[0]["KEYWORD"], $BODYs[0]["FILASXPAGINA"], $BODYs[0]["NUMPAGINA"]);
-
+        $CobroShootLink = new Application_Entity_CobroShootLink();
         if (isset($validar_sms) && $validar_sms != "") {
             $validar_smsT = $validar_sms;
             if ($validar_smsT == true)
@@ -75,8 +75,16 @@ class Rt_IndexController extends Zend_Controller_Action {
             $now = date("Y-m-d");
             $fechaVen = date("Y-m-d", strtotime("$fecha + $tcad day"));
             if ($now > $fechaVen) {
-                echo "vencio";
-                header('Location: /pe/ne/wap/rt-devel/');
+                header('Location: /pe/ne/wap/public/rt-devel/?error=008&num=' . $tnun);
+            } else {
+                $Url = $CobroShootLink->obtenerIdDEscarga($tnun, '9985', "0");
+                $this->view->Url = $Url;
+                $i = '';
+//                 $rutaDescarga .= '<script>' . "\n";
+//                $rutaDescarga .= 'window.location = "'.$Url.'";' . "\n";
+//                $rutaDescarga .= '</script>' . "\n";
+//          
+//                
             }
         }
 
@@ -87,15 +95,15 @@ class Rt_IndexController extends Zend_Controller_Action {
                 header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_RTWAPNX");
                 exit;
             } else {
-                $CobroShootLink = new Application_Entity_CobroShootLink();
+
                 $EstaSuscritoResult = $CobroShootLink->EstaSuscrito($num, 124);
                 if ($EstaSuscritoResult == '0') {
                     header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_RTWAPNX");
                 }
-                
             }
         }
- 
+            
+       
         $this->view->DESTACADOs = $DESTACADOs;
         $this->view->TituloPortal = $TituloPortal;
         $this->view->dataContenido = $dataContenido;
@@ -112,7 +120,7 @@ class Rt_IndexController extends Zend_Controller_Action {
     }
 
     public function validacionAction() {
-     $CobroShootLink = new Application_Entity_CobroShootLink();
+        $CobroShootLink = new Application_Entity_CobroShootLink();
         $v = isset($_GET['v']) ? $_GET['v'] : "1";
         $c = isset($_GET['c']) ? $_GET['c'] : header("Location: ../rt/") && die();
         if (isset($_SERVER['HTTP_MSISDN']) && $_SERVER['HTTP_MSISDN'] != "") {
@@ -120,15 +128,16 @@ class Rt_IndexController extends Zend_Controller_Action {
             $CobroShootLink->shootLinkRT($str_number, $c, "0");
         }
 
+
         if (isset($_GET['nue'])) {
             $number = $_GET['nue'];
             if (( strlen($number) == 11)) {
                 if (substr($number, 0, 2) == "51") {
-                    $CobroShootLink->shootLink2($number, $c, "0");
+                    $CobroShootLink->shootLinkRT($number, $c, "0");
                 }
             } elseif (strlen($number) == 9) {
                 if (substr($number, 0, 2) !== "51") {
-                    $CobroShootLink->shootLink2("51" . $number, $c, "0");
+                    $CobroShootLink->shootLinkRT("51" . $number, $c, "0");
                 }
             }
         }
@@ -146,7 +155,6 @@ class Rt_IndexController extends Zend_Controller_Action {
                 }
             }
         }
-
         if (isset($_SERVER['HTTP_X_UP_CALLING_LINE_ID']) && $_SERVER['HTTP_X_UP_CALLING_LINE_ID'] != "") {
             $str_number = $_SERVER['HTTP_X_UP_CALLING_LINE_ID'];
             $CobroShootLink->shootLinkRT($str_number, $c, "0");
@@ -213,6 +221,7 @@ class Rt_IndexController extends Zend_Controller_Action {
         $link = '';
         $numGet = count($_getVars);
         $bucleGet = $numGet - 1;
+
         for ($x = 0; $x <= $bucleGet; $x++) {
             if ($x == 0) {
                 $link.=$_valor[$x];
@@ -220,6 +229,12 @@ class Rt_IndexController extends Zend_Controller_Action {
                 $link.="&" . $_key[$x] . "=" . $_valor[$x];
             }
         }
+        $num = $_valor[$bucleGet];
+        $nue = $_valor[$bucleGet - 1];
+        $tema = $_valor[$bucleGet - 2];
+        $this->view->num = $num;
+        $this->view->tema = $tema;
+        $this->view->nue = $nue;
         $this->view->link = $link;
     }
 

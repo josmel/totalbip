@@ -163,11 +163,11 @@ class Ft_IndexController extends Zend_Controller_Action {
             $number = $nue;
             if (( strlen($number) == 11)) {
                 if (substr($number, 0, 2) == "51") {
-                    $CobroShootLink->shootLink3($number, $c, "0",$f,$c,$t,$i);
+                    $CobroShootLink->shootLink($number, $c, "0",$f,$c,$t,$i);
                 }
             } elseif (strlen($number) == 9) {
                 if (substr($number, 0, 2) !== "51") {
-                    $CobroShootLink->shootLink3("51" . $number, $c, "0",$f,$c,$t,$i);
+                    $CobroShootLink->shootLink("51" . $number, $c, "0",$f,$c,$t,$i);
                 }
             }
         }

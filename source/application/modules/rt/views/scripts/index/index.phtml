@@ -1,3 +1,4 @@
+
 <div id="page">
     <div id="head"><?PHP echo $this->TituloPortal; ?></div>
     <?PHP if (count($this->DESTACADOs) > 0) { ?>
@@ -8,7 +9,7 @@
                 ?>
                 <div id="destacado">
                     <img src="<?php echo STATIC_URL ?>img/<?= $destacado["RUTAIMAGEN"]; ?>" alt="destacado" /> 
-                    <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
+                    <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i ?>&tema=<?= $item["Tema"]; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
                         <?= $item["Tema"]; ?><span><?= $item["Artista"]; ?></span>
                     </a>
                     <div style="clear:both"></div>
@@ -21,7 +22,10 @@
     ?>
     <?php if (isset($this->error) and ( $this->error == "007")) { ?>
         <div id="list-titulo-precio" class="error">Estimado usuario usted no cuenta con saldo necesario o intentelo nuevamente.</div>
-    <?php } ?>	
+    <?php } ?>
+    <?php if (isset($this->error) and ( $this->error == "008")) { ?>
+        <div id="list-titulo-precio" class="error">Estimado usuario el link a caducado.</div>
+    <?php } ?>    
     <?PHP if (count($this->BODYs) > 0) { ?> 
         <?PHP foreach ($this->BODYs as $body) { ?>		
             <div id="list-titulo"><?= $body["TITULOENPORTAL"]; ?></div>
@@ -36,11 +40,11 @@
                     ?>
                     <div class="list-item<?= $rowalter; ?>"> <span class="numero">
                             <?= $count; ?>.</span>
-                        <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
+                        <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&tema=<?= $item["Tema"]; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
                             <?= $item["Tema"]; ?>
                             <span>
                                 <?= $item["Artista"]; ?>
-                            </span></a><a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item['CodigoRBT'] . '' . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>" class="descarga"></a>
+                            </span></a><a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item['CodigoRBT'] . '' . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&tema=<?= $item["Tema"]; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>" class="descarga"></a>
                         <div style="clear:both"></div>
                     </div>
                     <?PHP
@@ -59,3 +63,8 @@
         <a href="/pe/ne/wap/rt-devel/gor?link=/pe/ne/wap/rt-devel/legal?v=<? echo $this->val_sms; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>&i=<? echo $this->i ?>&nue=<? echo $this->numx; ?>&num=<? echo $this->num; ?>">Legal</a>
     </div>
 </div>
+<?php if (isset($this->Url) && $this->Url!='') { ?>
+   <script>
+        window.location = "<?Php echo $this->Url  ?>";
+    </script>
+<?php } ?>

@@ -4,7 +4,16 @@
         <img width="100%" src="<?php echo STATIC_URL ?>img/rt/banner-nextel-tonos.jpg">               
     </div>  
     <div id="list-titulo-precio">      
-        Te est&aacute;s suscribiendo al servicio de Tonos, cada semana podr&aacute;s descargar el tono que desees. Costo US$ 1.80 por suscripci&oacute;n semanal.
+        Estas a punto de  descargar el tono <u><?php echo $this->tema ?></u>. Costo US$ 1.80 por la su descarga.
+        <div class="btn-ancho" style="text-align: center;color: #FFFFFF;font-weight: bold;margin: 20px auto;border-radius: 4px;padding: 3px;-moz-box-sizing: border-box;border: medium none;" >
+            <?php if (isset($this->num) && $this->num!='' ) { ?>
+                  <a style="color: #FFFFFF; font-size: 14px;background-color:#E05206;font-weight:bold;" href="/pe/ne/wap/rt-devel?num=<?php echo $this->num?>">ATRAS</a>    
+       
+            <?php } elseif(isset($this->nue) && $this->nue!='' ){?>
+                        <a style="color: #FFFFFF; font-size: 14px;background-color:#E05206;font-weight:bold;" href="/pe/ne/wap/rt-devel?nue=<?php echo $this->nue?>">ATRAS</a>    
+       
+                    <?php } ?>
+        </div>
         <div class="btn-ancho" style="text-align: center;color: #FFFFFF;font-weight: bold;margin: 20px auto;border-radius: 4px;padding: 3px;-moz-box-sizing: border-box;border: medium none;" >
             <a style="color: #FFFFFF; font-size: 14px;background-color:#E05206;font-weight:bold;" href="/pe/ne/wap/rt-devel/gor?link=<? echo $this->link ?>">ACEPTAS DESCARGAR EL TONO</a>
         </div>

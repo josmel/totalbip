@@ -3,7 +3,6 @@
 class Ft_CfgController extends Zend_Controller_Action {
 
     public function cfgAction() {
-
         $categ = isset($_GET['categoria']) ? strtolower($_GET['categoria']) : false;
         $funcion = isset($_GET['funcion']) ? strtolower($_GET['funcion']) : false;
         if ($categ === false || $funcion === false) {
