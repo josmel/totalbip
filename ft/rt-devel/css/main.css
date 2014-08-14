@@ -1,0 +1,294 @@
+/* CSS Document */
+/*Import Reset CSS*/
+@import url(reset.css);
+body {
+	padding:5px;
+	font-family: 'NIISans-Bold', Arial;
+}
+/*** PAGE ***/
+div#page {
+	width:900px;
+	height:auto;
+	margin:auto;
+	border:solid 0px red;
+}
+/*** HEAD ***/
+div#head {
+	background-color: #e05206;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+	/* Border radius */
+	-o-border-top-left-radius: 6px;
+	-o-border-top-right-radius: 6px;
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	height:39px;
+	line-height:39px;
+	color:#FFF;
+	text-align:left;
+	font-size:18px;
+	font-family: 'NIISans-Bold', Arial;
+	padding:0 15px;
+}
+/*** destacado ***/
+div#destacado {
+	background-color: #ebeae6;
+	/* Border radius */
+	-o-border-bottom-right-radius: 6px;
+	-o-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	color: #c55510;
+	font-size:18px;
+	height:70px;
+	margin-bottom:5px;
+	padding-right:10px;
+}
+div#destacado a {
+	display:block;
+	color: #e05206;
+	font-weight:bold;
+	float:left;
+	line-height:18px;
+	margin-top:15px;
+	padding-left:10px;
+}
+div#destacado a.vermas {
+	margin-top:0px;
+	background-image: url(../img/icono_lupa1.png);
+	width:12px;
+	float:right;
+	border:solid 0px red;
+	height:28px;
+	margin-top:20px;
+}
+div#destacado a span {
+	font-weight:normal !important;
+	display:block;
+}
+div#destacado img {
+	/* Border radius */
+	-o-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-left-radius: 6px;
+	float:left;
+	padding:6px;
+}
+div#list-titulo-precio {
+	background-color: #eceee7;
+	/* Border radius */
+	/* Border radius */
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	border-radius:6px;	
+	font-size:12px;
+	padding: 10px;
+	margin-bottom:5px;
+}
+div#list-titulo {
+	background-color: #726961;
+	/* Border radius */
+		/* Border radius */
+			-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	border-radius:6px;
+	color: #fff;
+	font-size:16px;
+	line-height: 35px;
+	text-transform: none;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-weight: bold;
+	
+	/*background-color: #d7d2cb;
+	color: #100f0b;*/
+}
+
+div#list-titulo.categoria {
+	margin-top:5px;
+}
+
+div#list-musica  {
+	background-color: #ebebe6;
+	margin:0 5px;
+	padding:0 0px;
+	font-size:14px;
+}
+
+div#list-musica  .list-item{
+
+background-image: linear-gradient(bottom, #E5E8E1 25%, #edeee8 54%);
+background-image: -o-linear-gradient(bottom, #E5E8E1 25%, #edeee8 54%);
+background-image: -moz-linear-gradient(bottom, #E5E8E1 25%, #edeee8 54%);
+background-image: -webkit-linear-gradient(bottom, #E5E8E1 25%, #edeee8 54%);
+background-image: -ms-linear-gradient(bottom, #E5E8E1 25%, #edeee8 54%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.25, #E5E8E1),
+	color-stop(0.54, #edeee8)
+);
+
+height:auto;
+color: #726961;
+font-weight:bold;
+padding:0 10px;
+	border-bottom:solid 1px #cacac8;
+}
+div#list-musica  .list-item.odd{
+
+background-image: linear-gradient(bottom, #f4f4f2 25%, #fefefe 54%);
+background-image: -o-linear-gradient(bottom, #f4f4f2 25%, #fefefe 54%);
+background-image: -moz-linear-gradient(bottom, #f4f4f2 25%, #fefefe 54%);
+background-image: -webkit-linear-gradient(bottom, #f4f4f2 25%, #fefefe 54%);
+background-image: -ms-linear-gradient(bottom, #f4f4f2 25%, #fefefe 54%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.25, #f4f4f2),
+	color-stop(0.54, #fefefe)
+);
+}
+div#list-musica  .list-item.marco{
+	padding:15px 20px;
+	line-height:18px !important;
+}
+div#list-musica  .list-item p{
+	font-weight:normal  !important;
+	line-height:18px;	
+}
+div#list-musica  .list-item p b{
+	font-weight:bold !important;}
+div#list-musica  .list-item span.numero{
+	display:block;
+	line-height:42px;
+	float:left;
+	text-align:center;
+	width:30px;
+}div#list-musica  .list-item img{
+	float:left;
+	padding:0px;
+	margin:0px;
+	margin-right:10px;
+	padding:5px 0;
+}
+
+div#list-musica  .list-item a {
+	color: #726961 !important;
+	display:block;	
+	border:solid 0px red;
+	float:left;
+	margin-top:7px;
+}
+div#list-musica  .list-item a.cat{
+	margin:0px;
+	font-size:13px;
+	line-height:39px;
+}
+div#list-musica  .list-item a.descarga{
+	margin-top:0px;
+	background-image: url(../img/descarga.png);
+	width:30px;
+	float:right;
+	border:solid 0px red;
+	height:42px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+div#list-musica  .list-item a:hover {
+	text-decoration:underline;
+	}
+div#list-musica  .list-item a span {
+	font-weight:normal !important;
+	display:block;
+}
+
+div#footer {
+	background-color: #726961;
+	/* Border radius */
+		/* Border radius */
+			-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-o-border-radius:6px;
+	border-radius:6px;
+	color: #fff;
+	font-size:12px;
+	line-height: 25px;
+	text-transform: none;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-weight: bold;
+	text-align:center;
+}
+div#footer a{	 
+	color: #fff;
+}
+
+#busqueda{
+    border: 1px solid #dadada;    
+    height: 37px;
+    width: 90%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px
+}
+#boton{
+    background:url('../img/icono_buscador.jpg') no-repeat; 
+    height: 38px;
+    width: 45px;
+    position:absolute; top:0px; right:0px;
+}
+
+.vermas {
+	background-color: #FFF;
+	height:30px;
+	line-height:30px;
+	color:#e05206;
+	text-align: right;
+	font-size:14px;
+	font-family: 'NIISans-Bold', Arial;
+        padding: 0px 10px;
+	
+}
+
+#volver{
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 20px;
+    color : #e05206;
+    text-align: left;
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+}
+#masmusica{    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-right: 0px;
+    width: 50%;
+    position:absolute; top:0px; right:0px;
+}
+.error {
+	font-weight: bold;
+	color: #E05206;
+}
