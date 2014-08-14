@@ -17,7 +17,8 @@ class Ft_IndexController extends Zend_Controller_Action {
         $i = $this->_getParam('i',"");
         $token = $this->_getParam('token',"");
         $nuetxt = $this->_getParam('nuetxt',"");
-        $portal = $this->_getParam('portal',"");
+        $val_sms = $this->_getParam('val_sms',"");
+        $num=$this->_getParam('num',NULL);
 //        $t = isset($_GET["t"]) ? $_GET["t"] : "";
 //        $f = isset($_GET["f"]) ? $_GET["f"] : "";
 //        $i = isset($_GET["i"]) ? $_GET["i"] : "";
@@ -77,17 +78,18 @@ class Ft_IndexController extends Zend_Controller_Action {
             $conteDosG = json_decode($url);
             $str_number = "51" . $conteDosG->PTN;
         }
-//        if (!isset($str_number)) {
-//            header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_FTWAPNX");
-//            exit;
-//        } else {
-//            $CobroShootLink = new Application_Entity_CobroShootLink();
-//            $EstaSuscritoResult = $CobroShootLink->EstaSuscrito($str_number, 130);
-//            if ($EstaSuscritoResult == '0' and ! isset($str_number)) {
-//                header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_FTWAPNX");
-//            }
-//            exit;
-//        }
+        $str_number=$num;
+        if (!isset($str_number)) {
+            header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_FTWAPNX");
+            exit;
+        } else {
+            $CobroShootLink = new Application_Entity_CobroShootLink();
+            $EstaSuscritoResult = $CobroShootLink->EstaSuscrito($str_number, 130);
+            if ($EstaSuscritoResult == '0' and ! isset($str_number)) {
+                header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_FTWAPNX");
+            }
+            
+        }
 
         $this->view->nuetxt = $nuetxt;
         $this->view->DESTACADOs = $DESTACADOs;
@@ -99,6 +101,7 @@ class Ft_IndexController extends Zend_Controller_Action {
         $this->view->t = $t;
         $this->view->f = $f;
         $this->view->i = $i;
+        $this->view->val_sms = $val_sms;
     }
 
     public function validacionAction() {
@@ -106,9 +109,9 @@ class Ft_IndexController extends Zend_Controller_Action {
      $c = $this->_getParam('c',header("Location: http://bip.pe/pe/ne/wap/ft/") && die());
      $t = $this->_getParam('t',header("Location: http://bip.pe/pe/ne/wap/ft/") && die());
      $f = $this->_getParam('f',header("Location: http://bip.pe/pe/ne/wap/ft/") && die());
-     $i = $this->_getParam('i',"");
-     $nue = $this->_getParam('nue',"");
-     $num = $this->_getParam('num',"");
+     $i = $this->_getParam('i',NULL);
+     $nue = $this->_getParam('nue',NULL);
+     $num = $this->_getParam('num',NULL);
      $CobroShootLink = new Application_Entity_CobroShootLink();
         if (isset($_SERVER['HTTP_X_UP_CALLING_LINE_ID']) && $_SERVER['HTTP_X_UP_CALLING_LINE_ID'] != "") {
             $str_number = $_SERVER['HTTP_X_UP_CALLING_LINE_ID'];
@@ -150,7 +153,7 @@ class Ft_IndexController extends Zend_Controller_Action {
             if ($now > $fechaVen)
                 header('Location: /pe/ne/wap/ft/');
             else
-                $CobroShootLink->shootLink($tnun, $c, "0",$f,$c,$t,$i);
+          $CobroShootLink->shootLink($tnun, $c, "0",$f,$c,$t,$i);
         }
 
         /* fin */
@@ -186,12 +189,36 @@ class Ft_IndexController extends Zend_Controller_Action {
         $this->view->c = $c;
         $this->view->v = $v;
     }
+    
+    
+    
+      public function alertaAction() {
+          
+        
+        $_getVars = $_GET;
+        
+        $_key = array_keys($_getVars);
+        $_valor = array_values($_getVars);
+       $link='';
+        $numGet = count($_getVars);
+        $bucleGet = $numGet - 1;
+        for ($x = 0; $x <= $bucleGet; $x++) {
+            if ($x == 0) { 
+                $link.=$_valor[$x];
+            } else {
+                $link.="&" . $_key[$x] . "=" . $_valor[$x];
+            }
+        }
+        $this->view->link = $link;
+       
+    }
+    
 
     public function goAction() {
         $_getVars = $_GET;
         $_key = array_keys($_getVars);
         $_valor = array_values($_getVars);
-
+        $link='';
         $numGet = count($_getVars);
         $bucleGet = $numGet - 1;
         for ($x = 0; $x <= $bucleGet; $x++) {

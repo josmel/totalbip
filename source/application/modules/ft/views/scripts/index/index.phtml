@@ -20,7 +20,7 @@
 
                 <div id="destacado">
                     <img src="<?php echo STATIC_URL ?>img/<?= $destacado["RUTAIMAGEN"]; ?>" alt="destacado" />                          
-                    <a href="/gof?link=/pe/ne/wap/ft/validacion?v=<?= $val_sms; ?>&c=<?= $item["CodigoRBT"];?>&nue=<?php echo $this->nuetxt; ?> &t=<? echo $this->t ?>&f=<? echo $this->f ?>>&i=<? echo $this->i ?>"> 
+                    <a href="/pe/ne/wap/ft/alerta?link=/pe/ne/wap/ft/validacion?v=<?echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"];?>&nue=<?php echo $this->nuetxt; ?> &t=<? echo $this->t ?>&f=<? echo $this->f ?>>&i=<? echo $this->i ?>"> 
                         <?= $item["Tema"]; ?><span><?= $item["Artista"]; ?></span>
                     </a>
                     <div style="clear:both"></div>
@@ -46,11 +46,11 @@
 
                     <div class="list-item<?= $rowalter; ?>"> <span class="numero">
                             <?= $count; ?>
-                             .</span> <a href="/gof?link=/pe/ne/wap/ft/validacion?v=<?= $val_sms; ?>&c=<?= $item["CodigoRBT"] ?>&nue=<?php echo $this->nuetxt; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>&i=<? echo $this->i ?>">
+                             .</span> <a href="/pe/ne/wap/ft/alerta?link=/pe/ne/wap/ft/validacion?v=<?echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] ?>&nue=<?php echo $this->nuetxt; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>&i=<? echo $this->i ?>">
                             <?= $item["Tema"]; ?>
                             <span>
                                 <?= $item["Artista"]; ?>
-                            </span></a><a href="/gof?link=/pe/ne/wap/ft/validacion?v=<?= $val_sms; ?>&c=<?= $item["CodigoRBT"] ?>&nue=<?php echo $this->nuetxt; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>>&i=<? echo $this->i ?>" class="descarga"></a>
+                            </span></a><a href="/pe/ne/wap/ft/alerta?link=/pe/ne/wap/ft/validacion?v=<?echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] ?>&nue=<?php echo $this->nuetxt; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>>&i=<? echo $this->i ?>" class="descarga"></a>
                         <div style="clear:both"></div>
                     </div>
 

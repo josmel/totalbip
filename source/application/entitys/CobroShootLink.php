@@ -104,7 +104,7 @@ class Application_Entity_CobroShootLink {
         $SoapEsFreeUser = new nusoap_client($wsEsFreeUser, true);
         $parametros = array(
             'pais' => "51",
-            'numuser' => $NUMBER,
+            'numUser' => $NUMBER,
         );
         $resultado = $SoapEsFreeUser->call('EsFreeUser', $parametros);
         return $resultado['EsFreeUserResult'];
@@ -135,7 +135,7 @@ class Application_Entity_CobroShootLink {
             //"4241";//saldo insuficiente
             //"5241";//No esta provisionado en ALU y ATS
             //"5004";//Falta parametro en request
-            $EstaSuscritoFree = $this->EstaSuscritoFree($NUMBER, 124);
+            $EstaSuscritoFree = $this->EstaSuscritoFree($NUMBER);
             if ($EstaSuscritoFree == '1') {
                 $this->file_get_contents($NUMBER, $CODIGO);
             } else {
@@ -158,7 +158,9 @@ class Application_Entity_CobroShootLink {
         $xml = file_get_contents("http://174.121.234.90/Moso/WSMultimedia/wsTOOLS.asmx/RegistrarDescarga?operadora=3&numUser=" . $NUMBER . "&idContenido=0&catalogo=" . $CODIGO . "&esGratis=True");
         $x = new SimpleXMLElement($xml);
         $ID = $x;
+       $logDescarga= new Application_Entity_MdLog();
+       $logDescarga->getPutsDescargaLOG("http://174.121.234.90/mvpe/Baja.aspx",$ID,$NUMBER,$CODIGO );
         header("Location: http://174.121.234.90/nxpe/Baja.aspx?id=" . $ID);
-    }
+      }
 
 }

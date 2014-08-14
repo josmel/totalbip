@@ -1,0 +1,28 @@
+<PORTALWAP CODE="5" TITULO="Tonos">
+  <HEAD TYPE="LISTA">
+    <DESTACADO>
+      <NOMBRE>Destacado</NOMBRE>
+      <TITULOENPORTAL>Tonos</TITULOENPORTAL>
+      <TEXTOENPORTAL>Suscríbete para recibir un tono de timbrado cada semana. Costo por suscripción US$ 1.80 semanal. </TEXTOENPORTAL>
+      <ALBUM>67</ALBUM>
+      <KEYWORD>_RTWAP</KEYWORD>
+      <FILASXPAGINA>1</FILASXPAGINA>
+      <NUMPAGINA>0</NUMPAGINA>
+      <RUTAIMAGEN>_ImagenesPortalWap/destacado_musica-default.jpg</RUTAIMAGEN>
+    </DESTACADO>
+  </HEAD>
+  <BODY TYPE="LISTA">
+    <ITEM>
+      <NOMBRE>Principal</NOMBRE>
+      <TITULOENPORTAL>Top 10</TITULOENPORTAL>
+      <TEXTOENPORTAL>
+      </TEXTOENPORTAL>
+      <ALBUM>68</ALBUM>
+      <KEYWORD>_RTWAP</KEYWORD>
+      <FILASXPAGINA>10</FILASXPAGINA>
+      <NUMPAGINA>0</NUMPAGINA>
+      <RUTAIMAGEN>
+      </RUTAIMAGEN>
+    </ITEM>
+  </BODY>
+</PORTALWAP>

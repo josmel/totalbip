@@ -1,6 +1,6 @@
 <?php
 
-class App_Entity_MdLog {
+class Application_Entity_MdLog {
 
     function curPageURL() {
         $pageURL = 'http';
@@ -24,6 +24,8 @@ class App_Entity_MdLog {
     }
 
     function getPuts() {
+
+
 
         if (isset($_SERVER['HTTP_X_UP_CALLING_LINE_ID']) && $_SERVER['HTTP_X_UP_CALLING_LINE_ID'] != "") {
             $str_number = $_SERVER['HTTP_X_UP_CALLING_LINE_ID'];
@@ -56,18 +58,7 @@ class App_Entity_MdLog {
         return $var_;
     }
 
-//$file_name=fileName();
-//$bool=false;
-//$str_put=getPuts();
-//@ $fp=fopen($file_name,"a");
-//	if( $fp ){
-//		flock($fp,2);
-//		fputs($fp,$str_put . "\n");
-//		flock($fp,3);
-//	fclose($fp);
-//	$bool=true;
-//	}
-//return $bool;
+
 //LOG DE DESCARGAS
 
     function getPutsDescargaLOG($url, $id, $numero, $codigo_catalogo) {
@@ -76,31 +67,31 @@ class App_Entity_MdLog {
         } else {
             $str_number = $_GET['nu'];
         }
-        $var_ .= $fecha = date("Y-m-d") . ",";
-        $var_ .= $hora = date("H:i:s") . ",";
-        $var_ .= $url . ",";
-        $var_ .= $id . ",";
-        $var_ .= $codigo_catalogo . ",";
-        $var_ .= $numero;
-        $file_name = $this->fileNameLogDescarga();
-        $bool = false;
-        $str_put = $var_;
-        @ $fp = fopen($file_name, "a");
-        if ($fp) {
-            flock($fp, 2);
-            fputs($fp, $str_put . "\n");
-            flock($fp, 3);
-            fclose($fp);
-            $bool = true;
-        }
-        return $bool;
+        
+        $datos = array(
+            'fecha' => date("Y-m-d"),
+            'hora' => date("H:i:s"),
+            'url' => $url,
+            'id' => $id,
+            'codigo_catalogo' => $codigo_catalogo,
+            'numero' => $numero,
+        );
+        $id = $this->saveCdrDescargas($datos);
+        return $id;
     }
 
-    function fileNameLogDescarga() {
-        $path = "log/";
-        $name = date("Ymd");
-        $ext = ".descarga";
-        return $path . $name . $ext;
+    private function saveCdrDescargas($datos) {
+
+        $name = date('YmdH');
+        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../logs/cdr/rt/descargas/' . $name . ".descarga");
+        //$writer = new Zend_Log_Writer_Stream('/var/log/portalwap/'.$name.".moso");
+        $formatter = new Zend_Log_Formatter_Simple('%message%' . PHP_EOL);
+        $writer->setFormatter($formatter);
+        $log = new Zend_Log($writer);
+
+        $mensaje = $datos['fecha'] . "," . $datos['hora'] . "," . $datos['url'] . "," . $datos['id']
+                . "," . $datos['codigo_catalogo'] . "," . $datos['numero'];
+        $log->info($mensaje);
     }
 
 }

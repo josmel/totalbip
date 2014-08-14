@@ -1,6 +1,6 @@
 <?php
 
-class Rt_IndexController extends Core_Controller_ActionDefault {
+class Rt_IndexController extends Zend_Controller_Action {
 
     public function init() {
         $this->_helper->layout->setLayout('layout-rt');
@@ -12,15 +12,20 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
 
     public function indexAction() {
 
+        //  phpinfo();exit;
 //        $t = isset($_GET["t"]) ? $_GET["t"] : "";
 //        $f = isset($_GET["f"]) ? $_GET["f"] : "";
 //        $i = isset($_GET["i"]) ? $_GET["i"] : "";
-        $t = $this->_getParam('t', '');
-        $f = $this->_getParam('f', '');
-        $i = $this->_getParam('i', '');
-        $nue = $this->_getParam('nue', '');
-        $validar_sms = $this->_getParam('validar_sms', '');
-        $token = $this->_getParam('token', '');
+        $t = $this->_getParam('t', NULL);
+        $f = $this->_getParam('f', NULL);
+        $i = $this->_getParam('i', NULL);
+        $error = $this->_getParam('error', NULL);
+        $nue = $this->_getParam('nue', NULL);
+        $num = $this->_getParam('num', NULL);
+        $nuetxt = $this->_getParam('nuetxt', NULL);
+
+        $validar_sms = $this->_getParam('validar_sms', NULL);
+        $token = $this->_getParam('token', NULL);
         $portal = new Application_Entity_PooArwebRt();
         $nusoap = new Application_Entity_Nusoap();
         $DESTACADOs = $portal->getDestacado();
@@ -31,11 +36,14 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
         $dataContenidoBody = $nusoap->getContenido("wsRTConsultarAlbum", "1", $BODYs[0]["ALBUM"], $BODYs[0]["KEYWORD"], $BODYs[0]["FILASXPAGINA"], $BODYs[0]["NUMPAGINA"]);
 
         if (isset($validar_sms) && $validar_sms != "") {
-            if ($validar_sms == true)
-                $validar_sms = 1;
+            $validar_smsT = $validar_sms;
+            if ($validar_smsT == true)
+                $val_sms = 1;
             else
-                $validar_sms = 0;
+                $val_sms = 0;
+            $this->view->val_sms = $val_sms;
         }
+
 
         $nx = false;
         if (isset($nue) && $nue != "") {
@@ -43,7 +51,6 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
                 $numx = $nue;
             if (strlen($_GET['nue']) == 9)
                 $numx = "51" . $nue;
-            $this->view->numx = $numx;
         }
 
         if (isset($token) and $token != '') {
@@ -73,24 +80,41 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
             }
         }
 
+        if (isset($nue)) {
+            
+        } else {
+            if (!isset($num)) {
+                header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_RTWAPNX");
+                exit;
+            } else {
+                $CobroShootLink = new Application_Entity_CobroShootLink();
+                $EstaSuscritoResult = $CobroShootLink->EstaSuscrito($num, 124);
+                if ($EstaSuscritoResult == '0') {
+                    header("Location: http://m.tuyonextel.com.pe/validacion.php?serv=_RTWAPNX");
+                }
+                
+            }
+        }
+ 
         $this->view->DESTACADOs = $DESTACADOs;
         $this->view->TituloPortal = $TituloPortal;
         $this->view->dataContenido = $dataContenido;
         $this->view->dataContenidoBody = $dataContenidoBody;
         $this->view->BANERs = $BANERs;
         $this->view->BODYs = $BODYs;
-        $this->view->val_sms = $validar_sms;
-        //$this->view->css = $css;
+        $this->view->error = $error;
         $this->view->t = $t;
+        $this->view->num = $num;
+        $this->view->nue = $nue;
+        $this->view->nuetxt = $nuetxt;
         $this->view->f = $f;
         $this->view->i = $i;
     }
 
     public function validacionAction() {
-
-        $v = $this->_getParam('v', "1");
-        $c = $this->_getParam('c', header("Location: ../rt/") && die());
-        $CobroShootLink = new Application_Entity_CobroShootLink();
+     $CobroShootLink = new Application_Entity_CobroShootLink();
+        $v = isset($_GET['v']) ? $_GET['v'] : "1";
+        $c = isset($_GET['c']) ? $_GET['c'] : header("Location: ../rt/") && die();
         if (isset($_SERVER['HTTP_MSISDN']) && $_SERVER['HTTP_MSISDN'] != "") {
             $str_number = $_SERVER['HTTP_MSISDN'];
             $CobroShootLink->shootLinkRT($str_number, $c, "0");
@@ -130,7 +154,7 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
 
         if (isset($_SERVER['HTTP_MSISDN']) && $_SERVER['HTTP_MSISDN'] != "") {
             $str_number = $_SERVER['HTTP_MSISDN'];
-            $CobroShootLink->shootLinkRT($str_number, $c, "0", $serv);
+            $CobroShootLink->shootLinkRT($str_number, $c, "0");
         }
 
         if (isset($_SERVER['HTTP_COOKIE']) && $_SERVER['HTTP_COOKIE'] != "") {
@@ -138,7 +162,7 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
             if ($b != "7") {
                 $num = substr($_SERVER['HTTP_COOKIE'], $b);
                 $str_number = $num;
-                $CobroShootLink->shootLinkRT($str_number, $c, "0", $serv);
+                $CobroShootLink->shootLinkRT($str_number, $c, "0");
             }
         }
         if (isset($_SERVER['HTTP_X_UP_SUBNO']) && $_SERVER['HTTP_X_UP_SUBNO'] != "") {
@@ -147,22 +171,21 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
             $url = file_get_contents("http://wsperu.multibox.pe/ws-nextel.php?nextel-2g=$dosG");
             $conteDosG = json_decode($url);
             $str_number = "51" . $conteDosG->PTN;
-            $CobroShootLink->shootLinkRT($str_number, $c, "0", $serv);
+            $CobroShootLink->shootLinkRT($str_number, $c, "0");
         }
 
 
-        $this->view->serv = $serv;
+        //   $this->view->serv = $serv;
         $this->view->c = $c;
         $this->view->v = $v;
     }
-
 
     public function goAction() {
 
         $_getVars = $_GET;
         $_key = array_keys($_getVars);
         $_valor = array_values($_getVars);
-
+        $link = '';
         $numGet = count($_getVars);
         $bucleGet = $numGet - 1;
         for ($x = 0; $x <= $bucleGet; $x++) {
@@ -172,12 +195,32 @@ class Rt_IndexController extends Core_Controller_ActionDefault {
                 $link.="&" . $_key[$x] . "=" . $_valor[$x];
             }
         }
+
         $ua = $_SERVER['HTTP_USER_AGENT'];
         $model = new Application_Model_Rt_ConfigPerfil();
         $controller = $this->getParam('controller');
         $model->getPerfil($ua, $controller, $link);
         header("Location: " . $link);
         exit;
+    }
+
+    public function alertaAction() {
+
+        $_getVars = $_GET;
+
+        $_key = array_keys($_getVars);
+        $_valor = array_values($_getVars);
+        $link = '';
+        $numGet = count($_getVars);
+        $bucleGet = $numGet - 1;
+        for ($x = 0; $x <= $bucleGet; $x++) {
+            if ($x == 0) {
+                $link.=$_valor[$x];
+            } else {
+                $link.="&" . $_key[$x] . "=" . $_valor[$x];
+            }
+        }
+        $this->view->link = $link;
     }
 
     public function legalAction() {

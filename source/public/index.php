@@ -4,6 +4,8 @@ ini_set('session.auto_start', 0);
 error_reporting(E_ALL);
  ini_set("display_errors", 1);
 date_default_timezone_set('America/Lima');
+if (!defined('__DIR__'))
+ define('__DIR__', dirname(__FILE__));
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
 

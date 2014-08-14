@@ -8,7 +8,7 @@
                 ?>
                 <div id="destacado">
                     <img src="<?php echo STATIC_URL ?>img/<?= $destacado["RUTAIMAGEN"]; ?>" alt="destacado" /> 
-                    <a href="/gor?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i ?>&nue=<? echo $this->numx; ?>">
+                    <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
                         <?= $item["Tema"]; ?><span><?= $item["Artista"]; ?></span>
                     </a>
                     <div style="clear:both"></div>
@@ -36,11 +36,11 @@
                     ?>
                     <div class="list-item<?= $rowalter; ?>"> <span class="numero">
                             <?= $count; ?>.</span>
-                        <a href="/gor?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->numx; ?>">
+                        <a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item["CodigoRBT"] . "" . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>">
                             <?= $item["Tema"]; ?>
                             <span>
                                 <?= $item["Artista"]; ?>
-                            </span></a><a href="/gor?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item['CodigoRBT'] . '' . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->numx; ?>" class="descarga"></a>
+                            </span></a><a href="/pe/ne/wap/rt-devel/alertas?link=/pe/ne/wap/rt-devel/validacion?v=<? echo $this->val_sms; ?>&c=<?= $item['CodigoRBT'] . '' . $this->nuetxt; ?>&t=<? echo $this->t; ?>&f=<? echo $this->f; ?>&i=<? echo $this->i; ?>&nue=<? echo $this->nue; ?>&num=<? echo $this->num; ?>" class="descarga"></a>
                         <div style="clear:both"></div>
                     </div>
                     <?PHP
@@ -56,6 +56,6 @@
         <a href="../ft">  <img width="100%" src="<?php echo STATIC_URL ?>img/rt/banner-musica.gif"></a>
     </div>
     <div id="footer"><a href="http://m.tuyonextel.com.pe">&lt; Volver</a> | 
-        <a href="/gor?link=/pe/ne/wap/rt-devel/legal?v=<? echo $this->val_sms; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>&i=<? echo $this->i ?>&nue=<? echo $this->numx; ?>">Legal</a>
+        <a href="/pe/ne/wap/rt-devel/gor?link=/pe/ne/wap/rt-devel/legal?v=<? echo $this->val_sms; ?>&t=<? echo $this->t ?>&f=<? echo $this->f ?>&i=<? echo $this->i ?>&nue=<? echo $this->numx; ?>&num=<? echo $this->num; ?>">Legal</a>
     </div>
 </div>
